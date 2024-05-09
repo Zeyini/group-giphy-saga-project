@@ -22,7 +22,27 @@ router.get('/', (req, res) => {
 
 // add a new favorite
 router.post('/', (req, res) => {
-  res.sendStatus(201);
+  const newFavorite = req.body;
+  sqlText = `
+    INSERT INTO favorites
+      ( giphy_id,
+        title,
+        url,
+        category_id )
+      VALUES ( $1, $2, $3, $4);
+    `;
+    pool.query(sqlText, [newFavorite.giphy_id, 
+                         newFavorite.title,
+                         newFavorite.url,
+                         newFavorite.category_id ])
+    .then(dbResponse => {
+      console.log('Post of new favorite worked! Yay!');
+      res.sendStatus(201);
+    })
+    .catch(dbError => {
+      console.log('Error in sad post of favorite', dbError);
+      res.sendStatus(500);
+    })
 });
 
 // update a favorite's associated category
@@ -62,6 +82,8 @@ router.delete('/:id', (req, res) => {
     res.sendStatus(500);
   })
 });
+
+
 
 
 module.exports = router;

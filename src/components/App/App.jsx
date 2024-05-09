@@ -1,5 +1,6 @@
 import PhotoList from '../PhotoList/PhotoList';
 import photos from '../../data';
+import Search from '../App/Search';
 import './App.css';
 
 function App() {
@@ -8,8 +9,11 @@ function App() {
       <div>
         <h1>Giphy Search!</h1>
       </div>
-      <div className="main-content">
+      <div>
+      <Search/>
+        <div className="main-content">
         <PhotoList photos={photos} />
+      </div>
       </div>
     </>
   );

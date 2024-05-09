@@ -4,23 +4,28 @@ import logger from 'redux-logger';
 import { takeLatest, put } from 'redux-saga/effects'
 import axios from 'axios';
 
-function* getPhotos() {
+
+
+
+function* getPhotos(action) {
   try {
     let response = yield axios({
       method: 'GET',
-      url: '/api/photos'
+      url: '/api/photos',
+      data: action.payload
     })
 
     //put in saga is the same as dispatch in react
     yield put({
       type: 'SET_PHOTO',
-      payload: response.data
+      payload: response.data.data
     });
-    console.log(response.data);
+    console.log(response.data.data);
   } catch (error) {
     console.log('error with plant get request', error);
   }
 }
+
 
 function* addPhoto() {
   try {

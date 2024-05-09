@@ -1,4 +1,7 @@
 -- Database name should be: giphy_search_favorites
+DROP TABLE IF EXISTS favorites;
+DROP TABLE IF EXISTS categories;
+
 
 -- Categories table:
 CREATE TABLE "categories" (
@@ -23,7 +26,7 @@ CREATE TABLE favorites
     giphy_id VARCHAR(200),
     title VARCHAR(200),
     url VARCHAR(500),
-    category_id INT REFERENCES categories
+    category_id INT REFERENCES categories DEFAULT NULL
   );
 
 

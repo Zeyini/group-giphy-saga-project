@@ -1,0 +1,31 @@
+img {
+  width: 125%;
+}
+
+li {
+  list-style-type: none;
+}
+
+.photo-item {
+  /* display: flex;
+  flex-direction: column;
+  border: 1px solid red;
+  width: fit-content; */
+  display: flex;
+}
+
+.photo-list {
+  /* display: flex;
+  flex-direction: row; */
+  display: flex;
+  width: auto;
+}
+
+li {
+  display: flex;
+  flex-direction: column;
+}
+
+p {
+  margin: 0;
+}

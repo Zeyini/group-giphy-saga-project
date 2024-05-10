@@ -10,7 +10,6 @@ function FavoritesList() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch({type: 'GET_PHOTO', payload: 'cats'});
         getCategories();
         getFavorites();
     }, []);

@@ -1,6 +1,7 @@
 import PhotoList from '../PhotoList/PhotoList';
 import Search from '../App/Search';
 import './App.css';
+import FavoritesList from '../FavoritesList';
 
 function App() {
   return (

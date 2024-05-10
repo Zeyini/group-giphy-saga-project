@@ -4,6 +4,8 @@ import logger from 'redux-logger';
 import { takeLatest, put } from 'redux-saga/effects'
 import axios from 'axios';
 
+
+///////////////    PHOTOS    ///////////////    
 function* getPhotos(action) {
   try {
     let response = yield axios({
@@ -34,15 +36,60 @@ function* favoritePhoto(action) {
       type: "SET_FAVORITE",
       payload: response.data
     })
-  }
-  catch (error) {
+  } catch (error) {
     console.log('We have an add error', error)
   }
 }
 
+///////////////    FAVORITES    ///////////////    
+function* getFavorites() {
+  try {
+    let response = yield axios({
+      method: 'GET',
+      url: '/api/favorites'
+    })
+    yield put({
+      type: 'SET_FAVORITES',
+      payload: response.data
+    })
+  }
+  catch (error) {
+    console.log('Error in GET of favorites:', error);
+  }
+}
+
+///////////////    CATEGORIES    ///////////////   
+function* getCategories() {
+  console.log('in get of categories!')
+  try {
+    let response = yield axios({
+      method: 'GET',
+      url: '/api/categories'
+    })
+    console.log(response.data);
+    yield put({
+      type: 'SET_CATEGORIES',
+      payload: response.data
+    })
+  }
+  catch (error) {
+    console.log('Error in GET of categories:', error);
+  }
+}
+
+
+
 //below is the saga function generator 👇
 function* rootSaga() {
+  // GET PHOTO
   yield takeLatest('FETCH_PHOTOS', getPhotos);
+  // GET CATEGORY
+  yield takeLatest('GET_CATEGORIES', getCategories);
+  // GET FAVORITES
+  yield takeLatest('GET_FAVORITES', getFavorites);
+
+
+  // POST FAVORITE
   yield takeLatest('ADD_FAVORITE', favoritePhoto)
 }
 const sagaMiddleware = createSagaMiddleware();
@@ -57,7 +104,16 @@ const photos = (state = [], action) => {
 }
 
 const favorites = (state = [], action) => {
-  if (action.type === 'SET_FAVORITE') {
+
+  if (action.type === 'SET_FAVORITES') {
+    return action.payload;
+  }
+  return state;
+}
+
+const categories = (state = [], action) => {
+  if (action.type === 'SET_CATEGORIES') {
+    console.log('in set function!', action.payload)
     return action.payload;
   }
   return state;
@@ -68,7 +124,8 @@ const favorites = (state = [], action) => {
 const store = createStore(
   combineReducers({
     photos,
-    favorites
+    favorites,
+    categories
   }),
   applyMiddleware(sagaMiddleware, logger),
 );

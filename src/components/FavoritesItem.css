@@ -1,0 +1,32 @@
+img {
+    width: 125%;
+  }
+  
+  li {
+    list-style-type: none;
+  }
+  
+  .favorite-item {
+    /* display: flex;
+    flex-direction: column;
+    border: 1px solid red;
+    width: fit-content; */
+    display: flex;
+  }
+  
+  .favorite-list {
+    /* display: flex;
+    flex-direction: row; */
+    display: flex;
+    width: auto;
+  }
+  
+  li {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  p {
+    margin: 0;
+  }
+  

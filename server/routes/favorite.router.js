@@ -47,8 +47,11 @@ router.post('/', (req, res) => {
 
 // update a favorite's associated category
 router.put('/:id', (req, res) => {
+  console.log('Updating a favorite!');
+  console.log('req.params', req.params);
+  console.log('req.body', req.body)
   const favoriteId = req.params.id;
-  const newCategoryId = req.body.category_id;
+  const newCategoryId = req.body.category;
   let sqlText = `
     UPDATE favorites
       SET category_id = $1

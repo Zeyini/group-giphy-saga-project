@@ -29,7 +29,6 @@ function FavoritesList() {
 
     return (
         <section>   
-            {JSON.stringify(favorites)}
             {favorites.map(favorite => {
                 return (
                     <FavoritesItem favorite={favorite}

@@ -2,15 +2,28 @@
 import './FavoritesItem.css';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select'
-
+import InputLabel from '@mui/material/InputLabel';
+import {useState} from 'react';
+import { useDispatch } from 'react-redux';
 
 function FavoritesItem({ favorite, categories }) {
 
 const [selectedCategory, setSelectedCategory] = useState('');
 
+const dispatch = useDispatch();
+
+const saveCategory = (event) => {
+    let favId = favorite.id;
+    dispatch({
+        type: 'UPDATE_FAVORITE_CATEGORY',
+        payload: {category: selectedCategory, id: favId}
+    })
+}
+
+
   return (
-    <div className="favorite-item">
-      <ul className="favorite-list" key={favorite.id}>
+    <div className="favorite-item" key={favorite.id}>
+      <ul className="favorite-list" >
         <li>
           <img src={favorite.url} />
           {favorite.title}
@@ -18,18 +31,16 @@ const [selectedCategory, setSelectedCategory] = useState('');
             <Select
                 labelId="select-category"
                 value={selectedCategory}
-                onChange={(e) => {setSelectedCategory(e.target.value)}}
-                className={classes.select}>
+                onChange={(e) => {setSelectedCategory(e.target.value)}}>
                 {categories.map(category => {
                   return (
-                    <MenuItem key={category.id}
-                              value={category.id}
-                              category={category}>{category.name}
-                    </MenuItem>
+                        <MenuItem value={category.id}
+                                key={category.id}>{category.name}
+                        </MenuItem>
                   )
                 })}
             </Select>
-          <div>{favorite.category_id}</div>
+            <button onClick={saveCategory}>submit</button>
         </li>
       </ul>
     </div>

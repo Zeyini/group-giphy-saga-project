@@ -20,7 +20,7 @@ INSERT INTO "categories"
   ('whimsical');
 
 -- Favorites table:
--- Favorites table:
+
 CREATE TABLE favorites 
   ( id SERIAL PRIMARY KEY,
     giphy_id VARCHAR(200),
@@ -29,10 +29,4 @@ CREATE TABLE favorites
     category_id INT REFERENCES categories DEFAULT NULL
   );
 
-
--- You'll need a "favorites" table for storing each instance of
--- a Giphy image that has been "favorited."
--- Each favorite image can be assigned one of the existing
--- categories via foreign key. This is a one-to-many relationship:
---    One favorite has one category.
---    One category can be had by many favorites.
+  

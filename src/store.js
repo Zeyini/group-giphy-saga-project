@@ -58,6 +58,23 @@ function* getFavorites() {
   }
 }
 
+function* updateFavoriteCategory(action) {
+  console.log('whimsy?', action.payload)
+  try {
+    let response = yield axios({
+      method: 'PUT',
+      url:  `/api/favorites/${action.payload.id}`,
+      data: { category: action.payload.category }
+    })
+    yield put({
+      type: 'GET_FAVORITES',
+      payload: response.data
+    })
+  }
+  catch(error) {
+    console.log('Error in PUT to change a favorites category', error);
+  }
+}
 ///////////////    CATEGORIES    ///////////////   
 function* getCategories() {
   console.log('in get of categories!')
@@ -90,7 +107,9 @@ function* rootSaga() {
 
 
   // POST FAVORITE
-  yield takeLatest('ADD_FAVORITE', favoritePhoto)
+  yield takeLatest('ADD_FAVORITE', favoritePhoto);
+  // PUT/UPDATE FAVORITE
+  yield takeLatest('UPDATE_FAVORITE_CATEGORY', updateFavoriteCategory);
 }
 const sagaMiddleware = createSagaMiddleware();
 

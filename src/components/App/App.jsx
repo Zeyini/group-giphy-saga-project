@@ -1,6 +1,7 @@
 import PhotoList from '../PhotoList/PhotoList';
 import photos from '../../data';
 import './App.css';
+import FavoritesList from '../FavoritesList';
 
 function App() {
   return (
@@ -8,9 +9,10 @@ function App() {
       <div>
         <h1>Giphy Search!</h1>
       </div>
-      <div className="main-content">
+      <FavoritesList />
+      {/* <div className="main-content">
         <PhotoList photos={photos} />
-      </div>
+      </div> */}
     </>
   );
 }

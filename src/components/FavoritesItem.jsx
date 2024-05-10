@@ -1,16 +1,14 @@
 
-import Select from '@material-ui/core/Select';
 import './FavoritesItem.css';
-import DropdownItem from './DropdownItem';
 import { useSelector } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
+// import { makeStyles } from '@material-ui/core/styles';
+// import Select from '@material-ui/material/Select';
+// import MenuItem from '@material-ui/material/MenuItem';
+import { Select, MenuItem, InputLabel } from '@mui/material';
 
-export default function FavoritesItem({ favorite }) {
+function FavoritesItem({ favorite, categories }) {
 
-  const categories = useSelector(store => store.categories);
-
+const [selectedCategory, setSelectedCategory] = useState('');
 
   return (
     <div className="favorite-item">
@@ -18,22 +16,26 @@ export default function FavoritesItem({ favorite }) {
         <li>
           <img src={favorite.url} />
           {favorite.title}
-          <InputLabel id="select-category">category</InputLabel>
-            <Select>
+          {/* <InputLabel id="select-category">category</InputLabel>
+            <Select
                 labelId="select-category"
-                value={selectedValue}
-                onChange={(e) => {setSelectedValue(e.target.value)}}
-                className={classes.select}
+                value={selectedCategory}
+                onChange={(e) => {setSelectedCategory(e.target.value)}}
+                className={classes.select}>
                 {categories.map(category => {
+                  return (
                     <MenuItem key={category.id}
                               value={category.id}
                               category={category}>{category.name}
                     </MenuItem>
+                  )
                 })}
-            </Select>
+            </Select> */}
           <div>{favorite.category_id}</div>
         </li>
       </ul>
     </div>
   );
 }
+
+export default FavoritesItem;

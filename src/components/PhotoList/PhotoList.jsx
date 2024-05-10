@@ -16,9 +16,9 @@ function PhotoList() {
 
   return photos.map((photo) => {
     return (
-      <>
+      <div key={photo.id}>
         <PhotoItem photo={photo} />
-      </>
+      </div>
     );
   });
 }

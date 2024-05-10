@@ -3,7 +3,7 @@ const router = express.Router();
 require('dotenv').config()
 const axios = require('axios')
 const API_KEY = process.env.API_KEY
-// moved the api to the router to protect out api key. don't have it on the cleint side code.
+// moved the api to the router to protect out api key. don't have it on the client side code.
 
 router.get('/', (req, res) => {
   //we need to find the payload get request from the user
@@ -22,5 +22,6 @@ router.get('/', (req, res) => {
       res.sendStatus(500)
     })
 });
+
 
 module.exports = router;

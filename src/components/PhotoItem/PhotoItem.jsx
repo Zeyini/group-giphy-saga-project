@@ -15,9 +15,9 @@ export default function PhotoItem({ photo }) {
   };
 
   return (
-    <div className="photo-item">
+    <div key={photo.id} className="photo-item">
       <ul className="photo-list">
-        <li key={photo.id}>
+        <li>
           <img src={photo.images.downsized_medium.url} />
           {photo.title}
           {favorite ? (

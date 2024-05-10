@@ -8,7 +8,7 @@ function* getPhotos(action) {
   try {
     let response = yield axios({
       method: 'GET',
-      url: `/api/photos?search=${action.payload}`,  
+      url: `/api/photos?search=${action.payload}`,
     })
 
     //put in saga is the same as dispatch in react
@@ -21,15 +21,18 @@ function* getPhotos(action) {
   }
 }
 
-function* addPhoto() {
+function* favoritePhoto(action) {
   try {
-    yield axios({
-      method: "POST",
-      url: '/api/photos'
-    })
+    let response =
+      yield axios({
+        method: "POST",
+        url: '/api/favorites',
+        data: action.payload
+      })
 
     yield put({
-      type: "ADD_FAVORITE"
+      type: "SET_FAVORITE",
+      payload: response.data
     })
   }
   catch (error) {
@@ -40,7 +43,7 @@ function* addPhoto() {
 //below is the saga function generator 👇
 function* rootSaga() {
   yield takeLatest('FETCH_PHOTOS', getPhotos);
-  yield takeLatest('ADD_FAVORITE', addPhoto)
+  yield takeLatest('ADD_FAVORITE', favoritePhoto)
 }
 const sagaMiddleware = createSagaMiddleware();
 
@@ -48,19 +51,24 @@ const sagaMiddleware = createSagaMiddleware();
 // photo reducer for the photos received with saga get
 const photos = (state = [], action) => {
   if (action.type === 'SET_PHOTOS') {
-
     return action.payload;
+  }
+  return state;
+}
 
+const favorites = (state = [], action) => {
+  if (action.type === 'SET_FAVORITE') {
+    return action.payload;
   }
   return state;
 }
 
 
-
 // The reducers live in the store below 
 const store = createStore(
   combineReducers({
-    photos
+    photos,
+    favorites
   }),
   applyMiddleware(sagaMiddleware, logger),
 );

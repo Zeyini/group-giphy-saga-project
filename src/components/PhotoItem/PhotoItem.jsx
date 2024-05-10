@@ -11,7 +11,12 @@ export default function PhotoItem({ photo }) {
   // ADD PHOTOS API
 
   const addFavorite = () => {
-    dispatch({ type: 'ADD_FAVORITE', payload: favorite });
+    let newFavorite = {
+      giphy_id: photo.id,
+      title: photo.title,
+      url: photo.images.downsized_medium.url,
+    };
+    dispatch({ type: 'ADD_FAVORITE', payload: newFavorite });
   };
 
   return (

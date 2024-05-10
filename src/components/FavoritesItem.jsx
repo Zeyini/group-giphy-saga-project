@@ -1,10 +1,8 @@
 
 import './FavoritesItem.css';
-import { useSelector } from 'react-redux';
-// import { makeStyles } from '@material-ui/core/styles';
-// import Select from '@material-ui/material/Select';
-// import MenuItem from '@material-ui/material/MenuItem';
-import { Select, MenuItem, InputLabel } from '@mui/material';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select'
+
 
 function FavoritesItem({ favorite, categories }) {
 
@@ -16,7 +14,7 @@ const [selectedCategory, setSelectedCategory] = useState('');
         <li>
           <img src={favorite.url} />
           {favorite.title}
-          {/* <InputLabel id="select-category">category</InputLabel>
+          <InputLabel id="select-category">category</InputLabel>
             <Select
                 labelId="select-category"
                 value={selectedCategory}
@@ -30,7 +28,7 @@ const [selectedCategory, setSelectedCategory] = useState('');
                     </MenuItem>
                   )
                 })}
-            </Select> */}
+            </Select>
           <div>{favorite.category_id}</div>
         </li>
       </ul>

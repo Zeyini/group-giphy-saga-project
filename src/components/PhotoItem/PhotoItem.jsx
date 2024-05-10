@@ -18,8 +18,8 @@ export default function PhotoItem({ photo }) {
     <div className="photo-item">
       <ul className="photo-list">
         <li key={photo.id}>
-          <img src={photo.url} />
-          {photo.name}
+          <img src={photo.images.downsized_medium.url} />
+          {photo.title}
           {favorite ? (
             <StarOutlinedIcon
               onClick={() => {

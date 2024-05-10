@@ -4,34 +4,28 @@ import logger from 'redux-logger';
 import { takeLatest, put } from 'redux-saga/effects'
 import axios from 'axios';
 
-
-
-
 function* getPhotos(action) {
   try {
     let response = yield axios({
       method: 'GET',
-      url: '/api/photos',
-      data: action.payload
+      url: `/api/photos?search=${action.payload}`,  
     })
 
     //put in saga is the same as dispatch in react
     yield put({
-      type: 'SET_PHOTO',
+      type: 'SET_PHOTOS',
       payload: response.data.data
     });
-    console.log(response.data.data);
   } catch (error) {
-    console.log('error with plant get request', error);
+    console.log('error with photo search', error);
   }
 }
-
 
 function* addPhoto() {
   try {
     yield axios({
       method: "POST",
-      url: 'api/photos'
+      url: '/api/photos'
     })
 
     yield put({
@@ -43,11 +37,9 @@ function* addPhoto() {
   }
 }
 
-
-
 //below is the saga function generator 👇
 function* rootSaga() {
-  yield takeLatest('GET_PHOTO', getPhotos);
+  yield takeLatest('FETCH_PHOTOS', getPhotos);
   yield takeLatest('ADD_FAVORITE', addPhoto)
 }
 const sagaMiddleware = createSagaMiddleware();
@@ -55,7 +47,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 // photo reducer for the photos received with saga get
 const photos = (state = [], action) => {
-  if (action.type === 'SET_PHOTO') {
+  if (action.type === 'SET_PHOTOS') {
 
     return action.payload;
 

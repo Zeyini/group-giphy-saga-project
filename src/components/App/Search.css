@@ -1,0 +1,10 @@
+.search-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-results {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
